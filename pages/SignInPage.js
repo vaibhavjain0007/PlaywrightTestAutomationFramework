@@ -7,6 +7,12 @@ export default class SignInPage {
         this.emailInput = page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address');
         this.signupButton = page.getByRole('button', { name: 'Signup' });
 
+        this.emailInputLogin = page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address');
+        this.passwordInputLogin = page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Password');
+        this.loginButton = page.getByRole('button', { name: 'Login' });
+        this.incorrectEmailOrPasswordText = page.getByText('incorrect!');
+
+
         this.firstNameInput = page.getByRole('textbox', { name: 'First name *' });
         this.lastNameInput = page.getByRole('textbox', { name: 'Last name *' });
         this.passwordInput = page.getByRole('textbox', { name: 'Password *' });
@@ -28,6 +34,12 @@ export default class SignInPage {
         await this.nameInput.fill(name);
         await this.emailInput.fill(email);
         await this.signupButton.click();
+    }
+
+    async login(email, password) {
+        await this.emailInputLogin.fill(email);
+        await this.passwordInputLogin.fill(password);
+        await this.loginButton.click();
     }
 
     async enterAccountDetails(accountInfo, addressInfo) {
