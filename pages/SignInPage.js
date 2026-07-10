@@ -6,6 +6,7 @@ export default class SignInPage {
         this.nameInput = page.getByRole('textbox', { name: 'Name' });
         this.emailInput = page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address');
         this.signupButton = page.getByRole('button', { name: 'Signup' });
+        this.emailAlreadyExistsText = page.getByText('Email Address already exist!');
 
         this.emailInputLogin = page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address');
         this.passwordInputLogin = page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Password');

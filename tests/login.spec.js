@@ -22,5 +22,13 @@ test.describe('Login Tests', () => {
             await expect(signInPage.incorrectEmailOrPasswordText)
                 .toHaveText('Your email or password is incorrect!');
         }
-    )
+    );
+
+    test ('verify logout after login', async ({ page, signInPage, homePage }) => {
+        await homePage.navigateTo('Login');
+        await signInPage.login(accountInfo.email, accountInfo.password);
+        await expect(homePage.loggedInUserLink).toContainText(`Logged in as ${accountInfo.name}`);
+        await homePage.logout();
+        await expect(homePage.signupLoginLink).toBeVisible();
+    });
 });

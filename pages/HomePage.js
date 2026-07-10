@@ -22,4 +22,8 @@ export default class HomePage {
     async deleteAccount() {
         await this.deleteAccountLink.click();
     }
+
+    async logout() {
+        await this.logoutLink.click();
+    }
 }
