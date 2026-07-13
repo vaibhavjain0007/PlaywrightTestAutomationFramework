@@ -26,6 +26,8 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    /* Attribute used by `getByTestId()` and related selectors */
+    testIdAttribute: 'data-qa',
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: 'https://automationexercise.com',
 
