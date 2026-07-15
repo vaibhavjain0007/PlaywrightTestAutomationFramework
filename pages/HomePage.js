@@ -16,7 +16,7 @@ export default class HomePage {
 
     async navigateTo(linkName) {
         await this.page.goto('/');
-        await this.page.getByRole('link', { name: linkName, exact: false }).click();
+        await this.page.getByRole('link', { name: linkName, exact: false }).first().click();
     }
 
     async deleteAccount() {
