@@ -7,6 +7,9 @@ export default class HomePage {
         this.logoutLink = page.getByRole('link', { name: ' Logout' });
         this.accountDeletedText = page.getByText('Account Deleted!');
         this.loggedInUserLink = page.getByText('Logged in as');
+
+        this.subscribeEmailInput = page.locator('#susbscribe_email');
+        this.emailSubscribedSuccessfullyText = page.locator('.alert-success');
     }
 
     async navigateToSignupLogin() {
@@ -25,5 +28,10 @@ export default class HomePage {
 
     async logout() {
         await this.logoutLink.click();
+    }
+
+    async subscribeEmail(email) {
+        await this.subscribeEmailInput.fill(email);
+        await this.page.keyboard.press('Enter');
     }
 }

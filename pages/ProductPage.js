@@ -1,9 +1,20 @@
+import { expect } from '@playwright/test';
+
 export default class ProductPage {
 
     constructor (page) {
         this.page = page;
+
+        this.productSearchInput = page.getByRole('textbox', { name: 'search'});
+        this.searchedProductTitle = page.locator('.title');
+        this.productInfo = page.locator('.single-products');
+
         this.productList = page.locator('.features_items');
         
+        this.productDetails = page.locator('.product-information');
+
+        this.cartModal = page.locator('#cartModal');
+
     }
 
     async viewProductDetails(productName) {
@@ -11,13 +22,49 @@ export default class ProductPage {
             .getByRole("link", { name: "View Product" }).click();
     }
 
-    // 1. Launch browser
-    // 2. Navigate to url 'http://automationexercise.com'
-    // 3. Verify that home page is visible successfully
-    // 4. Click on 'Products' button
-    // 5. Verify user is navigated to ALL PRODUCTS page successfully
-    // 6. The products list is visible
-    // 7. Click on 'View Product' of first product
-    // 8. User is landed to product detail page
-    // 9. Verify that detail detail is visible: product name, category, price, availability, condition, brand
+    async searchProduct(productName) {
+        await this.productSearchInput.fill(productName);
+        await this.productSearchInput.press('Tab');
+        await this.page.keyboard.press('Enter');
+    }
+
+    /**************** Not sure why this one don't work ****************/
+    // async hoverAndAddToCartProductByIndex(index) {
+    //     const product = this.productInfo.nth(index);
+    //     // await expect(product.locator('.product-overlay')).toBeVisible();
+    //     await product.hover();
+        
+
+    //     await expect(product.locator('.product-overlay')).toBeVisible();
+    //     // await product
+    //     //     .locator('.product-overlay .add-to-cart')
+    //     //     .click({ trial: true });
+    //     await product
+    //         .locator('.product-overlay')
+    //         .getByRole('link', { name: 'Add to cart' })
+    //         .click();
+    // }
+
+    async continueShopping() {
+        await this.cartModal
+            .getByRole('button', { name: 'Continue Shopping'}).click();
+    }
+
+    async viewCart() {
+        await this.cartModal
+            .getByRole('link', { name: 'View Cart'}).click();
+    }
+
+    async hoverAndAddToCartProductByIndex(index) {
+        const product = this.productInfo.nth(index);
+
+        // await product.scrollIntoViewIfNeeded();
+        await product.hover();
+
+        await product.locator('.product-overlay .add-to-cart').click();
+
+        // await expect(addToCart).toBeVisible();
+
+        // await addToCart.click();
+    }
 }
