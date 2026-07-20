@@ -12,6 +12,8 @@ export default class ProductPage {
         this.productList = page.locator('.features_items');
         
         this.productDetails = page.locator('.product-information');
+        this.productQty = page.locator('#quantity');
+        this.addToCartBtn = page.getByRole('button', { name: 'Add to cart' });
 
         this.cartModal = page.locator('#cartModal');
 
@@ -26,6 +28,14 @@ export default class ProductPage {
         await this.productSearchInput.fill(productName);
         await this.productSearchInput.press('Tab');
         await this.page.keyboard.press('Enter');
+    }
+
+    async setProductQty(quantity) {
+        await this.productQty.fill(quantity);
+    }
+
+    async addToCart() {
+        await this.addToCartBtn.click();
     }
 
     /**************** Not sure why this one don't work ****************/

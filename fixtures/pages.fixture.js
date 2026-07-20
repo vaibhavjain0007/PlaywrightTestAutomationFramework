@@ -5,6 +5,8 @@ import ContactUsPage from '../pages/ContactUsPage';
 import TestCasesPage from '../pages/TestCasesPage';
 import ProductPage from '../pages/ProductPage';
 import CartPage from '../pages/CartPage';
+import CheckoutPage from '../pages/CheckoutPage';
+import PaymentPage from '../pages/PaymentPage';
 
 export const test = base.extend({
 
@@ -42,6 +44,18 @@ export const test = base.extend({
         async ({ page }, use) => {
             const cartPage = new CartPage(page);
             await use(cartPage);
+        },
+
+    checkoutPage:
+        async ({ page }, use) => {
+            const checkoutPage = new CheckoutPage(page);
+            await use(checkoutPage);
+        },
+
+    paymentPage:
+        async({ page }, use) => {
+            const paymentPage = new PaymentPage(page);
+            await use(paymentPage);
         }
 });
 

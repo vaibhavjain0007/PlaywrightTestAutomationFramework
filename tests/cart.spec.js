@@ -17,4 +17,16 @@ test.describe ('verify cart page', async() => {
         expect(product.quantity).toBe("1");
         expect(product.total).toContain("500");
     });
+
+    test.only ('verify product quantity in cart', async ({ page, homePage, productPage, cartPage }) => {
+
+        await homePage.navigateTo('Products');
+        await productPage.viewProductDetails('Blue Top');
+        await productPage.setProductQty('4');
+        await productPage.addToCart();
+        await expect(productPage.cartModal).toBeVisible();
+        await productPage.viewCart();
+        const product = await cartPage.getProductDetails('Blue Top');
+        expect(product.quantity).toBe('4');
+    })
 })
